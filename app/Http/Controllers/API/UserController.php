@@ -54,7 +54,11 @@ class UserController extends Controller
         $user->save();
         return $user;
     }
-
+    /**
+     * Login Method
+     * @param \Illuminate\Http\Request $request
+     * @return array|\Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         if (Auth::attempt($request->only(['email', 'password']))) {

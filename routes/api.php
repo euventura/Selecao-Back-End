@@ -16,23 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
+
+/** User Routes */
 Route::post('/user', [UserController::class, 'create']);
 Route::post('/user/login', [UserController::class, 'login']);
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 Route::put('/user', [UserController::class, 'update'])->middleware('auth:sanctum');
 
 
-
+/** Comment Routes */
 Route::get('/comment', [CommentController::class, 'get']);
 Route::post('/comment', [CommentController::class, 'create'])->middleware('auth:sanctum');
 Route::put('/comment/{commentId}', [CommentController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/comment/{commentId}', [CommentController::class, 'delete'])->middleware('auth:sanctum');
-
-
-Route::middleware('auth:sanctum')->put('/{productId}/comments/{commentId}', function (Request $request) {
-    return $request->user();
-});

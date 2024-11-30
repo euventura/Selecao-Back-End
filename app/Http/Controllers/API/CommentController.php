@@ -23,6 +23,11 @@ class CommentController extends Controller
     {
         $this->comment = $comment;
     }
+    /**
+     * Create Method
+     * @param \Illuminate\Http\Request $request
+     * @return \App\Models\Comment|\Illuminate\Database\Eloquent\Model
+     */
     public function create(Request $request): Comment|Model
     {
         $request->validate([
@@ -36,6 +41,12 @@ class CommentController extends Controller
         return $this->comment->create($data);
     }
 
+    /**
+     * Update Method
+     * @param \Illuminate\Http\Request $request
+     * @param mixed $commentId
+     * @return \App\Models\Comment|\Illuminate\Database\Eloquent\Model
+     */
     public function update(Request $request, $commentId): Comment|Model
     {
         $request->validate([
@@ -53,7 +64,12 @@ class CommentController extends Controller
 
         return $comment;
     }
-
+    /**
+     * Delete Method
+     * @param \Illuminate\Http\Request $request
+     * @param mixed $commentId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function delete(Request $request, $commentId): JsonResponse
     {
 
@@ -65,7 +81,10 @@ class CommentController extends Controller
             return response()->json('Comment Not Found', 404);
         }
     }
-
+    /**
+     * Get Method
+     * @return array|\Illuminate\Database\Eloquent\Collection
+     */
     public function get(): array|Collection
     {
         return Comment::select('id', 'product_id', 'comment', 'created_at', 'updated_at')->get();
