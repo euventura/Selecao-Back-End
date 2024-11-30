@@ -4,7 +4,7 @@ Teste de seleção para a vaga de Backend
 
 ## Conceitos
 
-Por ser algo simples, não julguei interessante criar abstrações, serviços ou qualquer estrutura complexa para resolver problemas com pouca regras de negócios. Optei por resolver tudo no controller
+Por ser algo simples, não julguei interessante criar abstrações, serviços ou qualquer estrutura complexa para resolver problemas com pouca regras de negócios. Optei por resolver tudo no controller, mas de forma elegante.
 
 ## Soluções
 
