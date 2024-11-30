@@ -19,7 +19,7 @@ class CommentTest extends TestCase
         $response = $this->getJson(
             '/api/comment',
         );
-        $response->assertSuccessful()->assertJsonStructure([['id', 'comment', 'product_id', 'created_at', 'updated_at']]);
+        $response->assertSuccessful()->assertJsonStructure([['id', 'comment', 'product_id', 'created_at', 'updated_at', 'user' => ['id', 'name']]]);
     }
 
     public function test_create_success()
@@ -77,10 +77,11 @@ class CommentTest extends TestCase
     {
 
         User::factory()->create();
+
         $userFail = User::factory()->create();
         $comment = Comment::factory()->create();
-
         $token = $userFail->createToken('test');
+
         $response = $this->withHeaders(
             ['Authorization' => 'Bearer ' . $token->plainTextToken]
         )

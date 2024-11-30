@@ -87,6 +87,10 @@ class CommentController extends Controller
      */
     public function get(): array|Collection
     {
-        return Comment::select('id', 'product_id', 'comment', 'created_at', 'updated_at')->get();
+        return Comment::select('id', 'product_id', 'user_id', 'comment', 'created_at', 'updated_at')
+            ->with('user', function ($query) {
+                $query->select('name', 'id');
+            })
+            ->get();
     }
 }
