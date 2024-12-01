@@ -22,14 +22,16 @@ jobs:
       run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Generate key
       run: php artisan key:generate
+    - name: Config Clear
+      run: php artisan config:clear
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
     - name: Create Database
       run: |
         mkdir -p database
-        touch database/database.sqlite
+        touch databasetest.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
         DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
+        DB_DATABASE: databasetest.sqlite
       run: php artisan test
