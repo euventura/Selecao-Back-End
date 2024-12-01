@@ -36,5 +36,6 @@ class Comment extends Model
             'changed_at' => $this->updated_at
         ];
         $this->history = array_merge($comment->history ?? [], [$addToHistory]);
+        return $this;
     }
 }
