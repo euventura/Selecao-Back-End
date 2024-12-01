@@ -28,4 +28,13 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function addToHistory()
+    {
+        $addToHistory = [
+            'comment' => $this->comment,
+            'changed_at' => $this->updated_at
+        ];
+        $this->history = array_merge($comment->history ?? [], [$addToHistory]);
+    }
 }

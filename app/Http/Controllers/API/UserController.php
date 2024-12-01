@@ -13,16 +13,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    protected $user;
-
-    /**
-     * Method __construct
-     * @param \App\Models\User $user
-     */
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
     /**
      * Create new User
      * @param \Illuminate\Http\Request $request
@@ -33,7 +23,7 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
-        return $this->user->create($data);
+        return User::create($data);
     }
 
     /**

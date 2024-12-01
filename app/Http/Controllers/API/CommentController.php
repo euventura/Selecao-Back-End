@@ -13,16 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    protected $comment;
-
-    /**
-     * Method __construct
-     * @param \App\Models\Comment $comment
-     */
-    public function __construct(Comment $comment)
-    {
-        $this->comment = $comment;
-    }
     /**
      * Create Method
      * @param \Illuminate\Http\Request $request
@@ -38,7 +28,7 @@ class CommentController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['product_id'] = '1';
 
-        return $this->comment->create($data);
+        return Comment::create($data);
     }
 
     /**
@@ -54,12 +44,8 @@ class CommentController extends Controller
         ]);
 
         $comment = Comment::where('id', $commentId)->where('user_id', Auth::user()->id)->firstOrFail();
-        $addToHistory = [
-            'comment' => $comment->comment,
-            'changed_at' => $comment->updated_at
-        ];
+        $comment->addToHistory();
         $comment->comment = $request->input('comment');
-        $comment->history = array_merge($comment->history ?? [], [$addToHistory]);
         $comment->save();
 
         return $comment;
