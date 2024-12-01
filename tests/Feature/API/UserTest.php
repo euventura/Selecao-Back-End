@@ -65,7 +65,6 @@ class UserTest extends TestCase
             'email' => 'email2@email.com',
             'password' => 'password2'
         ]);
-        $response->dump();
         $response->assertSuccessful()->assertJsonFragment(['email' => 'email2@email.com']);
     }
 
@@ -78,7 +77,6 @@ class UserTest extends TestCase
             'email' => 'email2@email.com',
             'password' => 'password2'
         ]);
-        $response->dump();
         $response->assertUnauthorized();
     }
 }
